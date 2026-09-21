@@ -39,6 +39,9 @@ diubah setiap versi.
 Di Coolify, buat satu aplikasi frontend untuk repo ini dan pasang domain atau
 proxy path `/bgremover/`. Pengaturan nginx di `deploy/` sudah mengatur redirect
 trailing slash, health check, dan fallback SPA tanpa menyamarkan 404 aset.
+Pada deployment production saat ini resource bernama `bgremover-web`, memakai
+GitHub App `fahry-github`, branch `main`, port `80`, dan route publik
+`https://xixlabs.net/bgremover/`. Push ke `main` memicu deployment otomatis.
 
 ## Dokumentasi
 
