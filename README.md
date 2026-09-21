@@ -14,7 +14,7 @@ Atur variabel berikut di Coolify:
 
 | Variabel | Kegunaan |
 | --- | --- |
-| `VITE_CHECKOUT_URL` | Checkout URL produksi untuk lisensi BGRemover |
+| `VITE_CHECKOUT_URL` | Opsional; mengganti checkout URL produksi BGRemover yang sudah disediakan |
 | `VITE_DOWNLOAD_URL` | Opsional; mengganti URL installer stabil dari GitHub Releases |
 
 Tidak ada API key Mayar atau token rahasia di halaman ini. Harga sengaja tidak

@@ -12,6 +12,7 @@ export const SITE = Object.freeze({
 
 export const CATALOG = Object.freeze({
   productId: "xix-bgremover",
+  mayarProductId: "52fda859-7c24-4a16-9bd5-acb54bf11fae",
   durationDays: 30,
   trialQuota: 10,
   maxActiveDevices: 1,
@@ -19,7 +20,7 @@ export const CATALOG = Object.freeze({
 });
 
 // Coolify supplies VITE_CHECKOUT_URL after the production Mayar product exists.
-export const CHECKOUT_URL = (import.meta.env?.VITE_CHECKOUT_URL || "").trim();
+export const CHECKOUT_URL = (import.meta.env?.VITE_CHECKOUT_URL || "https://xix-apps.myr.id/pl/xix-bgremover-monthly-license").trim();
 export const DOWNLOAD_URL = (
   import.meta.env?.VITE_DOWNLOAD_URL ||
   "https://github.com/mfahryf/XIX-BGRemover-release/releases/latest/download/BGRemover-latest-x64-setup.exe"
