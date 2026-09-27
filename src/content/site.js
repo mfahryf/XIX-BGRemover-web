@@ -10,13 +10,27 @@ export const SITE = Object.freeze({
   accentTitle: "on your own computer",
 });
 
+// The desktop app is the source of these engines: the id it uses, the name it
+// shows, and the mode suffix it prints beside that name. The page must not
+// invent its own labels, because the preview exists to mirror the real window.
+export const ENGINES = Object.freeze([
+  { id: "remove-bg", name: "Remove-BG", mode: "(Online)" },
+  { id: "remove-bg-rmbg-webgpu", name: "Remove-BG", mode: "(Offline)" },
+]);
+
+// One engine printed the way the app prints it: name and mode, so a mode suffix
+// that is already part of the name is never written twice.
+export function engineLabel(engine) {
+  return engine ? [engine.name, engine.mode].filter(Boolean).join(" ") : "";
+}
+
 export const CATALOG = Object.freeze({
   productId: "xix-bgremover",
   mayarProductId: "52fda859-7c24-4a16-9bd5-acb54bf11fae",
   durationDays: 30,
   trialQuota: 10,
   maxActiveDevices: 1,
-  engines: ["Remove-BG Online", "Remove-BG Offline"],
+  engines: ENGINES.map(engineLabel),
 });
 
 // Coolify supplies VITE_CHECKOUT_URL after the production Mayar product exists.
@@ -42,6 +56,14 @@ export const HERO_HIGHLIGHTS = [
   "A compact Winamp-style desktop shell with a modern glass finish",
 ];
 
+// No sample image is shipped with the page. Every trial starts from a file the
+// visitor chooses.
+export const DEMO_LIMITS = {
+  fileBytes: 5 * 1024 * 1024,
+  maxPixels: 2_000_000,
+  accepted: "PNG, JPG, or WebP",
+};
+
 export const PREVIEW = Object.freeze({
   palette: { accent: "#f5d76e", accent2: "#ff9f43", accent3: "#ffe6a0", bgOne: "#c9962e", bgTwo: "#9b3e63", bgThree: "#f1c453", bgBase: "#30200f" },
   brand: "BGREMOVER",
@@ -52,13 +74,13 @@ export const PREVIEW = Object.freeze({
   timer: "1:24",
   status: "PROCESSING 38%",
   progress: 62,
-  selectedEngine: "Remove-BG Online",
-  engines: [{ name: "Remove-BG Online", mode: "online" }, { name: "Remove-BG Offline", mode: "offline" }],
+  selectedEngine: "remove-bg",
+  engines: ENGINES,
   advancedRows: [{ id: "format", label: "FORMAT", value: "PNG", percent: 0 }, { id: "quality", label: "QUALITY", value: "100", percent: 80 }],
   files: [
-    ["portret-studio.jpg", "done", "OK"], ["sepatu-produk.png", "done", "OK"], ["jaket-ecommerce.webp", "done", "OK"],
-    ["tas-kulit.jpg", "done", "OK"], ["botol-parfum.png", "done", "OK"], ["meja-kayu.jpg", "done", "OK"],
-    ["jam-tangan.png", "done", "OK"], ["kucing-lucu.png", "processing", "38%"], ["logo-toko.png", "queued", "210.5 KB"],
+    ["portrait-studio.jpg", "done", "OK"], ["product-shoe.png", "done", "OK"], ["ecommerce-jacket.webp", "done", "OK"],
+    ["leather-bag.jpg", "done", "OK"], ["perfume-bottle.png", "done", "OK"], ["wooden-table.jpg", "done", "OK"],
+    ["wristwatch.png", "done", "OK"], ["cute-cat.png", "processing", "38%"], ["shop-logo.png", "queued", "210.5 KB"],
   ],
 });
 

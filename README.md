@@ -4,9 +4,22 @@ Halaman publik untuk aplikasi desktop XIX BGRemover di
 `https://xixlabs.net/bgremover/`.
 
 Halaman ini menjelaskan aplikasi, menampilkan pratinjau non-interaktif,
-menyediakan unduhan installer Windows, serta mengarahkan pembelian ke checkout
-Mayar produksi. Proses trial, aktivasi lisensi, dan pemrosesan file tetap
-berjalan di aplikasi desktop.
+menyediakan percobaan gratis di peramban, menyediakan unduhan installer Windows,
+serta mengarahkan pembelian ke checkout Mayar produksi. Aktivasi lisensi dan
+pemrosesan batch tetap berjalan di aplikasi desktop.
+
+## Percobaan di peramban
+
+Bagian `#try` menghapus latar satu gambar di komputer pengunjung memakai mesin
+offline yang sama dengan entri **Remove-BG (Offline)** di aplikasi desktop, yaitu
+paket `rembg-webgpu` — juga ketergantungan aplikasi desktop. WebGPU dipakai bila
+tersedia, dengan WebGPU FP32 lalu WASM sebagai cadangan; halaman menampilkan
+backend yang akhirnya dipakai.
+
+Mesinnya dimuat saat dipakai, bukan saat halaman dibuka: paket itu menarik
+onnxruntime-web beserta berkas wasm-nya, dan pengunjung yang hanya membaca
+seharusnya tidak menanggungnya. Model sekitar 40 MB diunduh pada percobaan
+pertama dan di-cache peramban setelahnya.
 
 ## Konfigurasi
 
@@ -28,6 +41,9 @@ npm run dev       # http://localhost:5173/bgremover/
 npm test
 npm run build
 ```
+
+Tidak ada berkas mesin yang disimpan di repo ini. Model dan runtime berasal dari
+paket `rembg-webgpu` dan `@huggingface/transformers`.
 
 ## Rilis dan deploy
 

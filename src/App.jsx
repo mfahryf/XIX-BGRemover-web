@@ -1,8 +1,8 @@
 
-import { VectorizerPage } from "./components/VectorizerPage";
+import { BGRemoverPage } from "./components/BGRemoverPage";
 
 export function App() {
-  return <VectorizerPage />;
+  return <BGRemoverPage />;
 }
 
 export default App;
