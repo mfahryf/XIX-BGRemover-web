@@ -25,7 +25,7 @@ const LOAD_TO = 0.45;
 export async function removeBackgroundFromImage(image, { onProgress = () => {} } = {}) {
   const capability = await getCapabilities();
   const backend = backendLabel(capability);
-  onProgress({ label: "Loading model (" + backend + ")", fraction: LOAD_FROM });
+  onProgress({ label: "Loading model...", fraction: LOAD_FROM });
 
   let failure = null;
   const unsubscribe = subscribeToProgress(({ phase, progress, errorMsg }) => {
@@ -33,14 +33,17 @@ export async function removeBackgroundFromImage(image, { onProgress = () => {} }
       failure = errorMsg || "The offline model could not be loaded.";
       return;
     }
+    // The backend name is deliberately left out of these labels: which device
+    // the engine picked is a technical detail, not something to read while a
+    // model loads.
     const stage =
       phase === "downloading"
-        ? "Downloading model"
+        ? "Downloading model..."
         : phase === "building"
           ? "Preparing model"
-          : "Loading model";
+          : "Loading model...";
     const share = LOAD_FROM + (Math.max(0, Math.min(100, progress)) / 100) * (LOAD_TO - LOAD_FROM);
-    onProgress({ label: stage + " (" + backend + ")", fraction: share });
+    onProgress({ label: stage, fraction: share });
   });
 
   try {

@@ -50,9 +50,14 @@ export const PLAN_POINTS = [
 
 export const HERO_HIGHLIGHTS = [
   "Remove backgrounds from product photos, portraits, and graphics",
-  "Online PhotoRoom engine for fast, high-quality results",
-  "Offline RMBG engine for local processing without uploading files",
+  "Online engine for fast, high-quality results",
+  "Offline engine that processes files without uploading them",
   "Batch processing with PNG output and transparent backgrounds",
+  "Runs on Windows 10 or newer",
+  "Choose your own output folder and clear finished rows from the list",
+  "Per-file status and a running total while a batch runs",
+  "Optional proxy settings for the online engine",
+  "Update check that asks before installing a new version",
   "A compact Winamp-style desktop shell with a modern glass finish",
 ];
 
