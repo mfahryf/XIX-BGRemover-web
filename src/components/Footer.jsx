@@ -17,6 +17,7 @@ export function Footer({
   mainLinks = [],
   legalLinks = [],
   copyright,
+  attribution = "",
 }) {
   return (
     <footer className="app-footer">
@@ -75,6 +76,8 @@ export function Footer({
             </ul>
           </div>
         )}
+
+        {attribution && <div className="footer-attribution">{attribution}</div>}
       </div>
     </footer>
   );

@@ -11,7 +11,7 @@ import {
 } from "../lib/image";
 import { DEMO_LIMITS } from "../content/site";
 
-// The offline engine pulls in the ONNX runtime and its WASM binary, which is tens
+// The offline engine pulls in the runtime and its WASM binary, which is tens
 // of megabytes. It is therefore loaded only when a visitor actually starts a
 // trial, so the page itself stays light for everyone who is just reading.
 function loadEngine() {
@@ -121,7 +121,6 @@ export function DemoPanel({
         blobUrl: output.blobUrl,
         width: size.width,
         height: size.height,
-        backend: output.backend,
         sourceName: file.name,
       });
       setFraction(1);

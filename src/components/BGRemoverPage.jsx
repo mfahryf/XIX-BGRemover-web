@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 import { AccountMenu } from "./AccountMenu";
 import LoginPromptModal from "./LoginPromptModal";
 import { getPlatformSession, logoutHref } from "../lib/platformAuth";
-import { CHECKOUT_URL, COPYRIGHT, CATALOG, DOWNLOAD_URL, FOOTER_LINKS, HERO_HIGHLIGHTS, PLAN_LABEL, PLAN_POINTS, PREVIEW, SITE } from "../content/site";
+import { ATTRIBUTION, CHECKOUT_URL, COPYRIGHT, CATALOG, DOWNLOAD_URL, FOOTER_LINKS, HERO_HIGHLIGHTS, PLAN_LABEL, PLAN_POINTS, PREVIEW, SITE } from "../content/site";
 
 const NAV_ITEMS = [
   { id: "try", href: "#try", label: "Try free", Icon: Wand2 },
@@ -58,7 +58,7 @@ export function BGRemoverPage() {
           <article className="download-card"><p className="section-label">Licence</p><h3 className="card-title">One licence for the full app</h3><p className="plan-amount">{PLAN_LABEL}</p><ul className="plan-points">{PLAN_POINTS.map((point) => <li key={point}>{point}</li>)}</ul>{CHECKOUT_URL ? <a className="button button-primary" href={CHECKOUT_URL} rel="noreferrer"><Sparkles className="nav-icon" aria-hidden="true" />Get licence</a> : <button type="button" className="button button-primary" disabled>Purchase link not configured</button>}</article>
         </div></section>
       </main>
-      <Footer brandName={SITE.name} logo={<img className="footer-brand-logo" src="XIX.svg" alt="" />} socialLinks={FOOTER_LINKS.social} mainLinks={FOOTER_LINKS.main} legalLinks={FOOTER_LINKS.legal} copyright={COPYRIGHT} />
+      <Footer brandName={SITE.name} logo={<img className="footer-brand-logo" src="XIX.svg" alt="" />} socialLinks={FOOTER_LINKS.social} mainLinks={FOOTER_LINKS.main} legalLinks={FOOTER_LINKS.legal} copyright={COPYRIGHT} attribution={ATTRIBUTION} />
       <LoginPromptModal open={loginPromptOpen} onClose={() => setLoginPromptOpen(false)} returnTo={returnTo} productName={SITE.shortName} />
     </div>
   );

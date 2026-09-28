@@ -2017,3 +2017,9 @@ h2 {
     transition-duration: 0.001ms !important;
   }
 }
+
+.footer-attribution {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
