@@ -18,9 +18,12 @@ import { removeBackground, subscribeToProgress } from "rembg-webgpu";
 import { imageDataToDataUrl } from "./image";
 
 // Served by this page's own nginx block, which proxies it to the model host.
+// The path was renamed from `m/` once: responses through it had been given a
+// 30-day lifetime, so visitors kept replaying a stale redirect from their own
+// cache long after the proxy was fixed. A new path sidesteps those entries.
 const MODEL_HOST = (
   import.meta.env?.VITE_MODEL_HOST ||
-  new URL(import.meta.env.BASE_URL + "m/", window.location.origin).href
+  new URL(import.meta.env.BASE_URL + "models/", window.location.origin).href
 ).trim();
 // The proxy forwards to the vendor host, whose layout keeps the repository in
 // the path: /<repo>/resolve/<revision>/<file>. The repository segment has to

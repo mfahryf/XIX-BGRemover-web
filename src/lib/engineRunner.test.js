@@ -22,7 +22,7 @@ describe("engineRunner model host", () => {
 
   it("mengarahkan berkas model ke jalur milik halaman sendiri", async () => {
     const env = await loadConfiguredEnv();
-    expect(env.remoteHost).toMatch(/\/m\/$/);
+    expect(env.remoteHost).toMatch(/\/models\/$/);
     expect(env.remoteHost.startsWith(window.location.origin)).toBe(true);
   });
 
@@ -39,8 +39,8 @@ describe("engineRunner model host", () => {
   });
 
   it("memakai host model lain saat VITE_MODEL_HOST diisi", async () => {
-    vi.stubEnv("VITE_MODEL_HOST", "https://mirror.example/m/");
+    vi.stubEnv("VITE_MODEL_HOST", "https://mirror.example/models/");
     const env = await loadConfiguredEnv();
-    expect(env.remoteHost).toBe("https://mirror.example/m/");
+    expect(env.remoteHost).toBe("https://mirror.example/models/");
   });
 });
