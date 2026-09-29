@@ -17,6 +17,20 @@ import { env } from "@huggingface/transformers";
 import { removeBackground, subscribeToProgress } from "rembg-webgpu";
 import { imageDataToDataUrl } from "./image";
 
+// The engine announces the backend it picked, and those lines name both the
+// engine and the graphics API behind it. They are plain `console.log` calls
+// without a level, so raising the runtime's log level cannot reach them; drop
+// them by their own prefix instead. Only messages that start with that prefix
+// are dropped — the runtime's warnings and errors carry no prefix and are left
+// alone, including the ones printed through the WebAssembly callbacks.
+const ENGINE_LOG_PREFIX = "[rembg]";
+const writeLog = console.log;
+
+console.log = function (...args) {
+  if (typeof args[0] === "string" && args[0].startsWith(ENGINE_LOG_PREFIX)) return;
+  writeLog.apply(this, args);
+};
+
 // Served by this page's own nginx block, which proxies it to the model host.
 // The path was renamed from `m/` once: responses through it had been given a
 // 30-day lifetime, so visitors kept replaying a stale redirect from their own

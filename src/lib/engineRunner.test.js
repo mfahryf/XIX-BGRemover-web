@@ -44,3 +44,38 @@ describe("engineRunner model host", () => {
     expect(env.remoteHost).toBe("https://mirror.example/models/");
   });
 });
+
+describe("log engine yang membeberkan backend", () => {
+  const LOG = console.log;
+
+  beforeEach(() => {
+    console.log = LOG;
+  });
+
+  it("membuang pesan berprefix engine", async () => {
+    const seen = [];
+    console.log = (...args) => seen.push(args.join(" "));
+
+    await loadConfiguredEnv();
+    console.log("[rembg] ✅ Using WebGPU with FP16 precision (shader-f16 supported)");
+    console.log("[rembg] 🚀 Model initialization:", "webgpu", "fp16");
+
+    expect(seen).toEqual([]);
+  });
+
+  it("meneruskan pesan lain, termasuk peringatan runtime tanpa prefix", async () => {
+    const seen = [];
+    console.log = (...args) => seen.push(args.join(" "));
+
+    await loadConfiguredEnv();
+    console.log("The powerPreference option is currently ignored");
+    console.log("Unknown model class \"custom\", attempting to construct from base class.");
+    console.log("rembg without the prefix");
+
+    expect(seen).toEqual([
+      "The powerPreference option is currently ignored",
+      "Unknown model class \"custom\", attempting to construct from base class.",
+      "rembg without the prefix",
+    ]);
+  });
+});
