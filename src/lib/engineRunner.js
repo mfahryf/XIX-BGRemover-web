@@ -3,10 +3,11 @@
 // The engine is the same one the desktop app ships for its Remove-BG (Offline)
 // entry. Nothing is uploaded, so the page keeps working with no server behind it.
 //
-// Model files are fetched through a same-origin path rather than the vendor's
-// public host, so neither the address bar nor the Network panel shows where they
-// come from. `VITE_MODEL_HOST` can point the same path at an own mirror; the
+// Model files are fetched from this page's own origin instead of the vendor's
+// public host. `VITE_MODEL_HOST` can point the same path at an own mirror; the
 // nginx block for this page forwards it either way (see deploy/nginx.conf).
+// The proxy follows the vendor's redirect, so the vendor's CDN host can still
+// appear in the Network panel while the model downloads.
 //
 // Progress labels are the stages the engine actually reports, translated for
 // display. The engine names its phases `downloading`, `building`, and `ready`;
@@ -21,9 +22,10 @@ const MODEL_HOST = (
   import.meta.env?.VITE_MODEL_HOST ||
   new URL(import.meta.env.BASE_URL + "m/", window.location.origin).href
 ).trim();
-// The vendor's default template puts the repository name in the path; keeping
-// only the revision drops it.
-const MODEL_PATH_TEMPLATE = "{revision}/";
+// The proxy forwards to the vendor host, whose layout keeps the repository in
+// the path: /<repo>/resolve/<revision>/<file>. The repository segment has to
+// stay in the template, otherwise every model file resolves to 404.
+const MODEL_PATH_TEMPLATE = "{model}/resolve/{revision}/";
 
 env.remoteHost = MODEL_HOST;
 env.remotePathTemplate = MODEL_PATH_TEMPLATE;
