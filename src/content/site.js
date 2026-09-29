@@ -37,7 +37,7 @@ export const CATALOG = Object.freeze({
 export const CHECKOUT_URL = (import.meta.env?.VITE_CHECKOUT_URL || "https://xixlabs.net/buy/bgremover").trim();
 export const DOWNLOAD_URL = (
   import.meta.env?.VITE_DOWNLOAD_URL ||
-  "https://github.com/mfahryf/XIX-BGRemover-release/releases/latest/download/BGRemover-latest-x64-setup.exe"
+  "https://xixlabs.net/download/bgremover"
 ).trim();
 
 export const PLAN_LABEL = "Price shown at checkout";
