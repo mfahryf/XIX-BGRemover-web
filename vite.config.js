@@ -1,11 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { obfuscateEngine } from "./vite.obfuscate.js";
 
 // Halaman ini dilayani di bawah xixlabs.net/bgremover, jadi base harus
 // memakai path halaman supaya aset tidak dimuat dari akar domain.
 export default defineConfig({
   base: "/bgremover/",
-  plugins: [react()],
+  plugins: [react(), obfuscateEngine(["engineRunner", "rembg-compositor.worker"])],
   // globals diaktifkan supaya Testing Library membersihkan DOM antar uji
   // secara otomatis; tanpa itu hasil render menumpuk dan pencarian elemen
   // menemukan lebih dari satu kecocokan.
