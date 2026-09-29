@@ -26,6 +26,12 @@ export function engineLabel(engine) {
 
 export const CATALOG = Object.freeze({
   productId: "xix-bgremover",
+  // The gateway catalog stays the source of truth for the price; when it
+  // changes there, match it here. The page states the amount itself instead of
+  // deferring to the checkout page, so the price is visible before the visitor
+  // commits to leaving the site.
+  priceAmount: 39000,
+  currency: "IDR",
   mayarProductId: "52fda859-7c24-4a16-9bd5-acb54bf11fae",
   durationDays: 30,
   trialQuota: 10,
@@ -40,7 +46,10 @@ export const DOWNLOAD_URL = (
   "https://xixlabs.net/download/bgremover"
 ).trim();
 
-export const PLAN_LABEL = "Price shown at checkout";
+export const PLAN_LABEL = (() => {
+  const amount = CATALOG.priceAmount.toLocaleString("en-US");
+  return CATALOG.currency + " " + amount + " / month";
+})();
 export const PLAN_POINTS = [
   `${CATALOG.trialQuota} successful files total before a licence is required`,
   `Valid for ${CATALOG.durationDays} days from payment`,
